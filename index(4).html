@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GloMeet — გაიცანი მსოფლიო</title>
+<style>
+:root{--bg:#090d1a;--panel:#12192c;--muted:#9aa6bc;--line:#ffffff14;--a:#8b5cf6;--b:#ec4899}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:#fff;background:radial-gradient(circle at 15% 0,#25154c,transparent 35%),radial-gradient(circle at 85% 10%,#3b1734,transparent 30%),var(--bg);min-height:100vh}button,input,select{font:inherit}button{cursor:pointer}
+header{position:sticky;top:0;z-index:20;background:#090d1add;backdrop-filter:blur(15px);border-bottom:1px solid var(--line)}
+.nav{max-width:1150px;height:70px;margin:auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between}.brand{font-size:23px;font-weight:900}.brand span{color:#c084fc}.links{display:flex;align-items:center;gap:8px}.links button{border:0;background:transparent;color:#b9c1d2;padding:10px 12px;border-radius:10px}.links button:hover{background:#ffffff0c;color:#fff}
+.primary{border:0;background:linear-gradient(135deg,var(--a),var(--b));color:#fff;font-weight:800;padding:12px 18px;border-radius:12px}.secondary{border:1px solid var(--line);background:#ffffff09;color:#fff;padding:12px 18px;border-radius:12px;font-weight:700}
+.hero{max-width:1150px;margin:auto;padding:85px 20px 55px;text-align:center}.tag{display:inline-block;padding:8px 14px;border:1px solid #a855f744;background:#a855f71a;border-radius:999px;color:#ddd6fe}.hero h1{font-size:clamp(44px,7vw,78px);line-height:1;margin:20px 0;letter-spacing:-3px}.gradient{background:linear-gradient(90deg,#c4b5fd,#f9a8d4);-webkit-background-clip:text;color:transparent}.hero p{max-width:680px;margin:auto;color:var(--muted);font-size:18px;line-height:1.7}.actions{display:flex;justify-content:center;gap:12px;margin-top:28px;flex-wrap:wrap}
+section{max-width:1150px;margin:auto;padding:50px 20px}.head{text-align:center;margin-bottom:25px}.head h2{font-size:34px;margin:0 0 8px}.head p{color:var(--muted)}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:#ffffff08;border:1px solid var(--line);border-radius:20px;padding:25px}.icon{font-size:30px}.card h3{margin:12px 0 8px}.card p{color:var(--muted);line-height:1.6}
+.toolbar{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:18px}.toolbar h2{margin:0}.filters{display:flex;gap:8px}.filters input,.filters select{background:#0e1527;border:1px solid var(--line);color:#fff;border-radius:10px;padding:10px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.profile{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden}.photo{height:200px;display:flex;align-items:flex-end;padding:12px}.avatar{width:58px;height:58px;border-radius:17px;background:#fbcfe8;display:grid;place-items:center;font-size:28px;border:3px solid #fff}.body{padding:14px}.body h3{margin:0 0 5px}.meta{color:var(--muted);font-size:13px}.bio{color:#cbd5e1;font-size:13px;line-height:1.5;margin:10px 0;min-height:40px}.row{display:flex;gap:7px}.like{flex:1;border:0;background:linear-gradient(135deg,var(--a),var(--b));color:#fff;border-radius:10px;padding:9px;font-weight:700}.chat{border:1px solid var(--line);background:transparent;color:#fff;border-radius:10px;padding:9px 12px}
+footer{text-align:center;padding:40px 20px;color:#77839a;border-top:1px solid var(--line);margin-top:20px}
+.overlay{position:fixed;inset:0;background:#000b;backdrop-filter:blur(7px);display:none;align-items:center;justify-content:center;padding:20px;z-index:100}.overlay.open{display:flex}.modal{width:min(440px,100%);background:#12192c;border:1px solid var(--line);border-radius:20px;padding:24px}.modalhead{display:flex;justify-content:space-between;align-items:center}.modal h2{margin:0}.close{border:0;background:#ffffff0b;color:#fff;width:35px;height:35px;border-radius:9px}.tabs{display:flex;gap:5px;background:#0b1120;padding:5px;border-radius:10px;margin:18px 0}.tabs button{flex:1;border:0;background:transparent;color:var(--muted);padding:9px;border-radius:8px}.tabs .on{background:#27314d;color:#fff}.form{display:grid;gap:10px}.form label{font-size:13px;color:#cbd5e1}.form input{width:100%;padding:12px;border:1px solid var(--line);background:#0c1324;color:#fff;border-radius:10px;outline:0}.form input:focus{border-color:#8b5cf6}.notice{padding:10px;border-radius:10px;background:#8b5cf61a;color:#ddd6fe;font-size:13px}.profilebox{display:flex;gap:13px;align-items:center;background:#0c1324;padding:14px;border-radius:14px}.myavatar{width:55px;height:55px;border-radius:15px;background:linear-gradient(135deg,var(--a),var(--b));display:grid;place-items:center;font-weight:900;font-size:23px}.small{color:var(--muted);font-size:13px;margin-top:3px}.hidden{display:none!important}
+@media(max-width:850px){.grid{grid-template-columns:repeat(2,1fr)}.cards{grid-template-columns:1fr}.links button:not(.primary){display:none}.toolbar{flex-direction:column;align-items:stretch}.filters{display:grid;grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.grid{grid-template-columns:1fr}.hero{padding-top:55px}.hero h1{letter-spacing:-2px}.filters{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="nav">
+<div class="brand">Glo<span>Meet</span> 🌍</div>
+<div class="links">
+<button onclick="go('discover')">აღმოაჩინე</button>
+<button onclick="go('features')">შესაძლებლობები</button>
+<button id="profileBtn" class="hidden" onclick="openProfile()">👤 <span id="navName"></span></button>
+<button id="loginBtn" onclick="openAuth('login')">შესვლა</button>
+<button id="registerBtn" class="primary" onclick="openAuth('register')">რეგისტრაცია</button>
+</div></div></header>
+
+<main>
+<section class="hero"><span class="tag">🌍 მთელი მსოფლიო ერთ სივრცეში</span><h1>გაიცანი <span class="gradient">ახალი ადამიანები</span></h1><p>GloMeet არის მარტივი საერთაშორისო გაცნობის პლატფორმა, სადაც შეგიძლია იპოვო საინტერესო ადამიანები სხვადასხვა ქვეყნიდან და გაიცნო ისინი.</p><div class="actions"><button class="primary" onclick="openAuth('register')">დაიწყე უფასოდ</button><button class="secondary" onclick="go('discover')">პროფილების ნახვა</button></div></section>
+
+<section id="features"><div class="head"><h2>რატომ GloMeet?</h2><p>მარტივი დიზაინი და ყველაფერი ერთ ადგილას.</p></div><div class="cards"><div class="card"><div class="icon">🌎</div><h3>მსოფლიო</h3><p>გაიცანი ადამიანები სხვადასხვა ქვეყნიდან.</p></div><div class="card"><div class="icon">❤️</div><h3>მოწონება</h3><p>მოგეწონა პროფილი? ერთი დაჭერით მოიწონე.</p></div><div class="card"><div class="icon">💬</div><h3>ჩატი</h3><p>მომავალ ეტაპზე რეალურ ჩატსაც დავამატებთ.</p></div></div></section>
+
+<section id="discover"><div class="toolbar"><div><h2>აღმოაჩინე ადამიანები</h2><div class="small">დემო პროფილები დიზაინის სანახავად</div></div><div class="filters"><input id="search" placeholder="🔎 სახელი ან ქვეყანა" oninput="render()"><select id="country" onchange="render()"><option value="">ყველა ქვეყანა</option><option>საქართველო</option><option>საფრანგეთი</option><option>იტალია</option><option>იაპონია</option><option>ესპანეთი</option><option>ბრაზილია</option></select></div></div><div id="grid" class="grid"></div></section>
+</main>
+<footer><b>GloMeet</b> · გაიცანი მსოფლიო 🌍<br><span style="font-size:12px">© 2026 GloMeet</span></footer>
+
+<div id="auth" class="overlay"><div class="modal"><div class="modalhead"><h2 id="authTitle">რეგისტრაცია</h2><button type="button" class="close" id="closeAuthBtn">×</button></div><div class="tabs"><button id="regTab" onclick="openAuth('register')">რეგისტრაცია</button><button id="logTab" onclick="openAuth('login')">შესვლა</button></div><form id="authForm" class="form"><div id="nameField"><label>სახელი</label><input id="name" placeholder="მაგ. Zauri"></div><div><label>ელფოსტა</label><input id="email" type="email" required placeholder="you@example.com"></div><div><label>პაროლი</label><input id="pass" type="password" minlength="6" required placeholder="მინიმუმ 6 სიმბოლო"></div><button class="primary" id="authSubmit">ანგარიშის შექმნა</button><div id="notice" class="notice hidden"></div></form></div></div>
+
+<div id="profileModal" class="overlay"><div class="modal"><div class="modalhead"><h2>ჩემი პროფილი</h2><button type="button" class="close" id="closeProfileBtn">×</button></div><div class="profilebox"><div class="myavatar" id="myAvatar">G</div><div><b id="myName">მომხმარებელი</b><div class="small" id="myEmail"></div></div></div><button class="secondary" style="width:100%;margin-top:12px" onclick="logout()">გასვლა</button></div></div>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+import {getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,onAuthStateChanged,signOut,updateProfile} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
+
+const firebaseConfig={apiKey:"AIzaSyC4AH8xWMni12v42fiNN7IMAsPpNE4SyPo",authDomain:"globalmeet-dd883.firebaseapp.com",projectId:"globalmeet-dd883",storageBucket:"globalmeet-dd883.firebasestorage.app",messagingSenderId:"642474193366",appId:"1:642474193366:web:eb86b02a7573b738193477",measurementId:"G-27BSHLMKHZ"};
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+
+let mode="register";
+const people=[
+["Anna",27,"საფრანგეთი","🇫🇷","👩🏻","linear-gradient(135deg,#7c3aed,#ec4899)","მიყვარს მოგზაურობა და ახალი ადამიანების გაცნობა."],
+["Marco",30,"იტალია","🇮🇹","👨🏻","linear-gradient(135deg,#059669,#0ea5e9)","ყავა, ზღვა და კარგი საუბრები."],
+["Yuki",25,"იაპონია","🇯🇵","👩🏻‍🦰","linear-gradient(135deg,#db2777,#7c3aed)","ფოტოგრაფია და ქალაქების აღმოჩენა მიყვარს."],
+["Lucas",29,"ბრაზილია","🇧🇷","👨🏽","linear-gradient(135deg,#16a34a,#eab308)","მინდა მსოფლიოს გარშემო საინტერესო ხალხი გავიცნო."],
+["Sofia",26,"ესპანეთი","🇪🇸","👩🏼","linear-gradient(135deg,#ea580c,#eab308)","მოგზაურობა, ფილმები და საინტერესო საუბრები."],
+["Nika",28,"საქართველო","🇬🇪","👨🏻","linear-gradient(135deg,#2563eb,#8b5cf6)","თბილისიდან. მინდა საინტერესო ადამიანების გაცნობა."]
+];
+
+window.go=id=>document.getElementById(id).scrollIntoView({behavior:"smooth"});
+window.openAuth=m=>{mode=m;document.getElementById("auth").classList.add("open");document.getElementById("authTitle").textContent=m==="register"?"შექმენი ანგარიში":"კეთილი იყოს შენი დაბრუნება";document.getElementById("authSubmit").textContent=m==="register"?"ანგარიშის შექმნა":"შესვლა";document.getElementById("nameField").classList.toggle("hidden",m!=="register");document.getElementById("regTab").classList.toggle("on",m==="register");document.getElementById("logTab").classList.toggle("on",m==="login");document.getElementById("notice").classList.add("hidden")};
+window.close=id=>document.getElementById(id).classList.remove("open");
+
+document.getElementById("closeAuthBtn").addEventListener("click",e=>{
+ e.preventDefault();
+ e.stopPropagation();
+ document.getElementById("auth").classList.remove("open");
+});
+
+document.getElementById("closeProfileBtn").addEventListener("click",e=>{
+ e.preventDefault();
+ e.stopPropagation();
+ document.getElementById("profileModal").classList.remove("open");
+});
+
+document.querySelectorAll(".overlay").forEach(overlay=>{
+ overlay.addEventListener("click",e=>{
+  if(e.target===overlay) overlay.classList.remove("open");
+ });
+});
+
+document.getElementById("authForm").addEventListener("submit",async e=>{
+ e.preventDefault();const notice=document.getElementById("notice"),btn=document.getElementById("authSubmit");
+ const email=document.getElementById("email").value.trim(),pass=document.getElementById("pass").value,name=document.getElementById("name").value.trim();
+ btn.disabled=true;btn.textContent="მოიცადე...";notice.classList.add("hidden");
+ try{
+  if(mode==="register"){
+   const cred=await createUserWithEmailAndPassword(auth,email,pass);
+   if(name) await updateProfile(cred.user,{displayName:name});
+   notice.textContent="ანგარიში წარმატებით შეიქმნა! 🎉";notice.classList.remove("hidden");
+  }else{
+   await signInWithEmailAndPassword(auth,email,pass);
+   close("auth");
+  }
+ }catch(err){
+  const map={"auth/email-already-in-use":"ეს ელფოსტა უკვე რეგისტრირებულია.","auth/invalid-email":"ელფოსტა არასწორია.","auth/weak-password":"პაროლი მინიმუმ 6 სიმბოლო უნდა იყოს.","auth/invalid-credential":"ელფოსტა ან პაროლი არასწორია.","auth/operation-not-allowed":"Firebase-ში Email/Password მეთოდი ჩართული არ არის.","auth/network-request-failed":"ქსელის პრობლემა. შეამოწმე ინტერნეტი."};
+  notice.textContent=map[err.code]||("შეცდომა: "+err.code);notice.classList.remove("hidden");
+ }finally{btn.disabled=false;btn.textContent=mode==="register"?"ანგარიშის შექმნა":"შესვლა"}
+});
+
+onAuthStateChanged(auth,user=>{
+ const login=document.getElementById("loginBtn"),reg=document.getElementById("registerBtn"),profile=document.getElementById("profileBtn");
+ if(user){
+  login.classList.add("hidden");reg.classList.add("hidden");profile.classList.remove("hidden");
+  document.getElementById("navName").textContent=user.displayName||user.email.split("@")[0];
+ }else{
+  login.classList.remove("hidden");reg.classList.remove("hidden");profile.classList.add("hidden");
+ }
+});
+window.openProfile=()=>{const u=auth.currentUser;if(!u)return;document.getElementById("myName").textContent=u.displayName||"მომხმარებელი";document.getElementById("myEmail").textContent=u.email;document.getElementById("myAvatar").textContent=(u.displayName||u.email||"G").charAt(0).toUpperCase();document.getElementById("profileModal").classList.add("open")};
+window.logout=async()=>{await signOut(auth);close("profileModal")};
+
+window.likePerson=name=>{if(!auth.currentUser){openAuth("login");return}alert("❤️ "+name+" მოგეწონა!")};
+window.chat=name=>{if(!auth.currentUser){openAuth("login");return}alert("💬 "+name+"-თან ჩატი შემდეგ ეტაპზე დაემატება.")};
+
+window.render=()=>{
+ const q=document.getElementById("search").value.toLowerCase(),c=document.getElementById("country").value;
+ const arr=people.filter(p=>(!q||(p[0]+" "+p[2]).toLowerCase().includes(q))&&(!c||p[2]===c));
+ document.getElementById("grid").innerHTML=arr.length?arr.map(p=>`<article class="profile"><div class="photo" style="background:${p[5]}"><div class="avatar">${p[4]}</div></div><div class="body"><h3>${p[0]}, ${p[1]}</h3><div class="meta">${p[3]} ${p[2]} · 🟢 ონლაინ</div><div class="bio">${p[6]}</div><div class="row"><button class="like" onclick="likePerson('${p[0]}')">♡ მოწონება</button><button class="chat" onclick="chat('${p[0]}')">💬</button></div></div></article>`).join(""):`<div style="grid-column:1/-1;text-align:center;color:#9aa6bc;padding:30px">პროფილი ვერ მოიძებნა.</div>`;
+};
+render();
+</script>
+</body>
+</html>
