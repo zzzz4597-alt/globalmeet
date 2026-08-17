@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GloMeet — გაიცანი მსოფლიო</title>
+<meta name="description" content="GloMeet — საერთაშორისო გაცნობის პლატფორმა.">
+<style>
+:root{--bg:#080c18;--panel:#11182a;--panel2:#17213a;--text:#fff;--muted:#98a4ba;--line:#ffffff16;--a:#8b5cf6;--b:#ec4899}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 10% 0,#241449,transparent 32%),radial-gradient(circle at 90% 10%,#35162f,transparent 28%),var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
+button,input,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.6;cursor:not-allowed}.hidden{display:none!important}
+header{position:sticky;top:0;z-index:30;background:#080c18e8;backdrop-filter:blur(15px);border-bottom:1px solid var(--line)}
+.nav{height:70px;max-width:1150px;margin:auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between}.brand{font-weight:900;font-size:24px}.brand span{color:#c084fc}
+.navlinks{display:flex;gap:6px;align-items:center}.navlinks button{border:0;background:transparent;color:#b8c1d2;padding:10px 12px;border-radius:10px}.navlinks button:hover{background:#fff1;color:#fff}
+.primary{border:0!important;background:linear-gradient(135deg,var(--a),var(--b))!important;color:#fff!important;font-weight:800!important;padding:11px 17px!important;border-radius:11px!important}.secondary{border:1px solid var(--line);background:#ffffff09;color:#fff;padding:11px 17px;border-radius:11px;font-weight:700}
+.hero{max-width:1150px;margin:auto;text-align:center;padding:85px 20px 60px}.tag{display:inline-block;border:1px solid #a855f744;background:#a855f71a;color:#ddd6fe;border-radius:999px;padding:8px 13px;font-size:13px;font-weight:700}.hero h1{font-size:clamp(44px,7vw,78px);line-height:1;margin:20px 0;letter-spacing:-3px}.grad{background:linear-gradient(90deg,#c4b5fd,#f9a8d4);-webkit-background-clip:text;color:transparent}.hero p{max-width:680px;margin:auto;color:var(--muted);font-size:18px;line-height:1.7}.actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:28px}
+section{max-width:1150px;margin:auto;padding:50px 20px}.head{text-align:center;margin-bottom:25px}.head h2{font-size:34px;margin:0 0 8px}.head p{color:var(--muted)}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:#ffffff07;border:1px solid var(--line);border-radius:20px;padding:25px}.icon{font-size:30px}.card h3{margin:12px 0 8px}.card p{color:var(--muted);line-height:1.6}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:18px}.toolbar h2{margin:0}.small{color:var(--muted);font-size:13px;margin-top:4px}.filters{display:flex;gap:8px}.filters input,.filters select{background:#0d1425;color:#fff;border:1px solid var(--line);padding:10px;border-radius:10px;outline:none}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.profile{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden}.photo{height:205px;display:flex;align-items:flex-end;padding:12px}.avatar{width:58px;height:58px;border-radius:17px;background:#fbcfe8;border:3px solid #fff;display:grid;place-items:center;font-size:28px}.body{padding:14px}.body h3{margin:0 0 5px}.meta{font-size:13px;color:var(--muted)}.bio{font-size:13px;line-height:1.5;color:#cbd5e1;min-height:40px;margin:10px 0}.row{display:flex;gap:7px}.like{flex:1;border:0;background:linear-gradient(135deg,var(--a),var(--b));color:#fff;border-radius:10px;padding:9px;font-weight:700}.chat{border:1px solid var(--line);background:transparent;color:#fff;border-radius:10px;padding:9px 12px}
+footer{text-align:center;padding:40px 20px;color:#77839a;border-top:1px solid var(--line);margin-top:25px}
+.overlay{position:fixed;inset:0;z-index:100;background:#000c;backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:20px}.overlay.is-open{display:flex}.modal{width:min(440px,100%);background:#11182a;border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:0 25px 80px #0008}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.modal-head h2{margin:0}.xbutton{width:38px;height:38px;border:0!important;border-radius:10px!important;background:#ffffff10!important;color:#fff!important;font-size:23px!important;line-height:38px;padding:0!important;display:grid;place-items:center}.xbutton:hover{background:#ffffff20!important}
+.tabs{display:flex;gap:5px;background:#0a1020;padding:5px;border-radius:11px;margin-bottom:18px}.tabs button{flex:1;border:0;background:transparent;color:var(--muted);padding:10px;border-radius:8px}.tabs .active{background:#28334f;color:#fff}.form{display:grid;gap:10px}.form label{font-size:13px;color:#cbd5e1}.form input{width:100%;padding:12px;background:#0b1222;border:1px solid var(--line);border-radius:10px;color:#fff;outline:none}.form input:focus{border-color:var(--a)}.notice{padding:11px;border-radius:10px;background:#8b5cf61a;border:1px solid #8b5cf633;color:#ddd6fe;font-size:13px;line-height:1.45}
+.userbox{display:flex;align-items:center;gap:13px;padding:15px;border-radius:15px;background:#0b1222;border:1px solid var(--line)}.myavatar{width:58px;height:58px;border-radius:17px;background:linear-gradient(135deg,var(--a),var(--b));display:grid;place-items:center;font-size:24px;font-weight:900}
+@media(max-width:850px){.grid{grid-template-columns:repeat(2,1fr)}.cards{grid-template-columns:1fr}.navlinks button:not(.primary){display:none}.toolbar{flex-direction:column;align-items:stretch}.filters{display:grid;grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.grid{grid-template-columns:1fr}.hero{padding-top:55px}.hero h1{letter-spacing:-2px}.filters{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header><div class="nav">
+  <div class="brand">Glo<span>Meet</span> 🌍</div>
+  <div class="navlinks">
+    <button type="button" id="discoverNav">აღმოაჩინე</button>
+    <button type="button" id="featuresNav">შესაძლებლობები</button>
+    <button type="button" id="profileNav" class="hidden">👤 <span id="navName"></span></button>
+    <button type="button" id="loginNav">შესვლა</button>
+    <button type="button" class="primary" id="registerNav">რეგისტრაცია</button>
+  </div>
+</div></header>
+
+<main>
+<section class="hero">
+  <span class="tag">🌍 მთელი მსოფლიო ერთ სივრცეში</span>
+  <h1>გაიცანი <span class="grad">ახალი ადამიანები</span></h1>
+  <p>GloMeet არის მარტივი საერთაშორისო გაცნობის პლატფორმა, სადაც შეგიძლია იპოვო საინტერესო ადამიანები სხვადასხვა ქვეყნიდან და გაიცნო ისინი.</p>
+  <div class="actions"><button type="button" class="primary" id="heroRegister">დაიწყე უფასოდ</button><button type="button" class="secondary" id="heroDiscover">პროფილების ნახვა</button></div>
+</section>
+
+<section id="features">
+  <div class="head"><h2>რატომ GloMeet?</h2><p>მარტივი დიზაინი და ყველაფერი ერთ ადგილას.</p></div>
+  <div class="cards">
+    <div class="card"><div class="icon">🌎</div><h3>მსოფლიო</h3><p>გაიცანი ადამიანები სხვადასხვა ქვეყნიდან.</p></div>
+    <div class="card"><div class="icon">❤️</div><h3>მოწონება</h3><p>მოგეწონა პროფილი? ერთი დაჭერით მოიწონე.</p></div>
+    <div class="card"><div class="icon">💬</div><h3>ჩატი</h3><p>რეალურ ჩატს შემდეგ ეტაპზე დავამატებთ.</p></div>
+  </div>
+</section>
+
+<section id="discover">
+  <div class="toolbar">
+    <div><h2>აღმოაჩინე ადამიანები</h2><div class="small">დემო პროფილები დიზაინის სანახავად</div></div>
+    <div class="filters"><input id="search" placeholder="🔎 სახელი ან ქვეყანა"><select id="country"><option value="">ყველა ქვეყანა</option><option>საქართველო</option><option>საფრანგეთი</option><option>იტალია</option><option>იაპონია</option><option>ესპანეთი</option><option>ბრაზილია</option></select></div>
+  </div>
+  <div id="grid" class="grid"></div>
+</section>
+</main>
+
+<footer><b>GloMeet</b> · გაიცანი მსოფლიო 🌍<br><span style="font-size:12px">© 2026 GloMeet</span></footer>
+
+<!-- AUTH MODAL -->
+<div id="authModal" class="overlay" aria-hidden="true">
+ <div class="modal" role="dialog" aria-modal="true">
+  <div class="modal-head"><h2 id="authTitle">შექმენი ანგარიში</h2><button type="button" class="xbutton" id="authClose" aria-label="დახურვა">×</button></div>
+  <div class="tabs"><button type="button" id="registerTab">რეგისტრაცია</button><button type="button" id="loginTab">შესვლა</button></div>
+  <form id="authForm" class="form">
+   <div id="nameField"><label>სახელი</label><input id="nameInput" placeholder="მაგ. Zauri"></div>
+   <div><label>ელფოსტა</label><input id="emailInput" type="email" required placeholder="you@example.com"></div>
+   <div><label>პაროლი</label><input id="passwordInput" type="password" minlength="6" required placeholder="მინიმუმ 6 სიმბოლო"></div>
+   <button type="submit" class="primary" id="authSubmit">ანგარიშის შექმნა</button>
+   <div id="authNotice" class="notice hidden"></div>
+  </form>
+ </div>
+</div>
+
+<!-- PROFILE MODAL -->
+<div id="profileModal" class="overlay" aria-hidden="true">
+ <div class="modal" role="dialog" aria-modal="true">
+  <div class="modal-head"><h2>ჩემი პროფილი</h2><button type="button" class="xbutton" id="profileClose" aria-label="დახურვა">×</button></div>
+  <div class="userbox"><div class="myavatar" id="myAvatar">G</div><div><b id="myName">მომხმარებელი</b><div class="small" id="myEmail"></div></div></div>
+  <button type="button" class="secondary" id="logoutBtn" style="width:100%;margin-top:12px">გასვლა</button>
+ </div>
+</div>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+import {getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,onAuthStateChanged,signOut,updateProfile} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
+
+const firebaseConfig={
+ apiKey:"AIzaSyC4AH8xWMni12v42fiNN7IMAsPpNE4SyPo",
+ authDomain:"globalmeet-dd883.firebaseapp.com",
+ projectId:"globalmeet-dd883",
+ storageBucket:"globalmeet-dd883.firebasestorage.app",
+ messagingSenderId:"642474193366",
+ appId:"1:642474193366:web:eb86b02a7573b738193477",
+ measurementId:"G-27BSHLMKHZ"
+};
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+
+const people=[
+["Anna",27,"საფრანგეთი","🇫🇷","👩🏻","linear-gradient(135deg,#7c3aed,#ec4899)","მიყვარს მოგზაურობა და ახალი ადამიანების გაცნობა."],
+["Marco",30,"იტალია","🇮🇹","👨🏻","linear-gradient(135deg,#059669,#0ea5e9)","ყავა, ზღვა და კარგი საუბრები."],
+["Yuki",25,"იაპონია","🇯🇵","👩🏻‍🦰","linear-gradient(135deg,#db2777,#7c3aed)","ფოტოგრაფია და ქალაქების აღმოჩენა მიყვარს."],
+["Lucas",29,"ბრაზილია","🇧🇷","👨🏽","linear-gradient(135deg,#16a34a,#eab308)","მინდა მსოფლიოს გარშემო საინტერესო ხალხი გავიცნო."],
+["Sofia",26,"ესპანეთი","🇪🇸","👩🏼","linear-gradient(135deg,#ea580c,#eab308)","მოგზაურობა, ფილმები და საინტერესო საუბრები."],
+["Nika",28,"საქართველო","🇬🇪","👨🏻","linear-gradient(135deg,#2563eb,#8b5cf6)","თბილისიდან. მინდა საინტერესო ადამიანების გაცნობა."]
+];
+
+const $=id=>document.getElementById(id);
+const openModal=el=>{el.classList.add("is-open");el.setAttribute("aria-hidden","false")};
+const closeModal=el=>{el.classList.remove("is-open");el.setAttribute("aria-hidden","true")};
+
+function setAuthMode(mode){
+ $("authTitle").textContent=mode==="register"?"შექმენი ანგარიში":"კეთილი იყოს შენი დაბრუნება";
+ $("authSubmit").textContent=mode==="register"?"ანგარიშის შექმნა":"შესვლა";
+ $("nameField").classList.toggle("hidden",mode!=="register");
+ $("registerTab").classList.toggle("active",mode==="register");
+ $("loginTab").classList.toggle("active",mode==="login");
+ $("authNotice").classList.add("hidden");
+ $("authForm").dataset.mode=mode;
+}
+function openAuth(mode){setAuthMode(mode);openModal($("authModal"));setTimeout(()=>$(mode==="register"?"nameInput":"emailInput").focus(),50)}
+function showNotice(text){$("authNotice").textContent=text;$("authNotice").classList.remove("hidden")}
+
+$("registerNav").addEventListener("click",()=>openAuth("register"));
+$("loginNav").addEventListener("click",()=>openAuth("login"));
+$("heroRegister").addEventListener("click",()=>openAuth("register"));
+$("registerTab").addEventListener("click",()=>setAuthMode("register"));
+$("loginTab").addEventListener("click",()=>setAuthMode("login"));
+$("discoverNav").addEventListener("click",()=>$("discover").scrollIntoView({behavior:"smooth"}));
+$("featuresNav").addEventListener("click",()=>$("features").scrollIntoView({behavior:"smooth"}));
+$("heroDiscover").addEventListener("click",()=>$("discover").scrollIntoView({behavior:"smooth"}));
+
+/* Explicit close handlers — no inline onclick */
+$("authClose").addEventListener("click",e=>{e.preventDefault();e.stopPropagation();closeModal($("authModal"))});
+$("profileClose").addEventListener("click",e=>{e.preventDefault();e.stopPropagation();closeModal($("profileModal"))});
+$("authModal").addEventListener("click",e=>{if(e.target===$("authModal"))closeModal($("authModal"))});
+$("profileModal").addEventListener("click",e=>{if(e.target===$("profileModal"))closeModal($("profileModal"))});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeModal($("authModal"));closeModal($("profileModal"))}});
+
+$("authForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ const mode=$("authForm").dataset.mode||"register";
+ const email=$("emailInput").value.trim();
+ const password=$("passwordInput").value;
+ const name=$("nameInput").value.trim();
+ const btn=$("authSubmit");
+ btn.disabled=true;btn.textContent="მოიცადე...";$("authNotice").classList.add("hidden");
+ try{
+  if(mode==="register"){
+   const cred=await createUserWithEmailAndPassword(auth,email,password);
+   if(name)await updateProfile(cred.user,{displayName:name});
+   showNotice("ანგარიში წარმატებით შეიქმნა! 🎉");
+   setTimeout(()=>closeModal($("authModal")),700);
+  }else{
+   await signInWithEmailAndPassword(auth,email,password);
+   closeModal($("authModal"));
+  }
+ }catch(err){
+  const messages={
+   "auth/email-already-in-use":"ეს ელფოსტა უკვე რეგისტრირებულია.",
+   "auth/invalid-email":"ელფოსტა არასწორია.",
+   "auth/weak-password":"პაროლი მინიმუმ 6 სიმბოლო უნდა იყოს.",
+   "auth/invalid-credential":"ელფოსტა ან პაროლი არასწორია.",
+   "auth/operation-not-allowed":"Firebase-ში Email/Password მეთოდი ჩართული არ არის.",
+   "auth/network-request-failed":"ქსელის პრობლემა. შეამოწმე ინტერნეტი."
+  };
+  showNotice(messages[err.code]||("შეცდომა: "+err.code));
+ }finally{
+  btn.disabled=false;btn.textContent=mode==="register"?"ანგარიშის შექმნა":"შესვლა";
+ }
+});
+
+onAuthStateChanged(auth,user=>{
+ if(user){
+  $("loginNav").classList.add("hidden");$("registerNav").classList.add("hidden");$("profileNav").classList.remove("hidden");
+  $("navName").textContent=user.displayName||user.email.split("@")[0];
+ }else{
+  $("loginNav").classList.remove("hidden");$("registerNav").classList.remove("hidden");$("profileNav").classList.add("hidden");
+ }
+});
+
+$("profileNav").addEventListener("click",()=>{
+ const u=auth.currentUser;if(!u)return;
+ $("myName").textContent=u.displayName||"მომხმარებელი";
+ $("myEmail").textContent=u.email||"";
+ $("myAvatar").textContent=(u.displayName||u.email||"G").charAt(0).toUpperCase();
+ openModal($("profileModal"));
+});
+$("logoutBtn").addEventListener("click",async()=>{await signOut(auth);closeModal($("profileModal"))});
+
+function render(){
+ const q=$("search").value.toLowerCase(),c=$("country").value;
+ const arr=people.filter(p=>(!q||(p[0]+" "+p[2]).toLowerCase().includes(q))&&(!c||p[2]===c));
+ $("grid").innerHTML=arr.map(p=>`
+ <article class="profile">
+  <div class="photo" style="background:${p[5]}"><div class="avatar">${p[4]}</div></div>
+  <div class="body"><h3>${p[0]}, ${p[1]}</h3><div class="meta">${p[3]} ${p[2]} · 🟢 ონლაინ</div><div class="bio">${p[6]}</div>
+  <div class="row"><button type="button" class="like likeBtn" data-name="${p[0]}">♡ მოწონება</button><button type="button" class="chat chatBtn" data-name="${p[0]}">💬</button></div></div>
+ </article>`).join("")||'<div style="grid-column:1/-1;text-align:center;color:#98a4ba;padding:30px">პროფილი ვერ მოიძებნა.</div>';
+}
+$("search").addEventListener("input",render);$("country").addEventListener("change",render);
+$("grid").addEventListener("click",e=>{
+ const like=e.target.closest(".likeBtn"),chat=e.target.closest(".chatBtn");
+ if(like){if(!auth.currentUser){openAuth("login");return}alert("❤️ "+like.dataset.name+" მოგეწონა!")}
+ if(chat){if(!auth.currentUser){openAuth("login");return}alert("💬 ჩატი "+chat.dataset.name+"-თან შემდეგ ეტაპზე დაემატება.")}
+});
+render();setAuthMode("register");
+</script>
+</body>
+</html>
